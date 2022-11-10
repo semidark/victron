@@ -14,17 +14,17 @@
 #      port: /dev/ttyUSB0
 
 devices:
-    - name: Shunt1
-      type: smartshunt
-      protocol: bluetooth-ble
-      mac: fd:d4:50:0f:6c:1b
+    - name: mppt
+      type: smartsolar
+      protocol: bluetooth
+      mac: FC:AA:8C:C8:10:A5
 
 # timer (in seconds) IN DEVELOPMENT!
 timer:
-    retry: 15
+    retry: 5
     bluetooth:
-        connected: 60,
-        disconnected: 60
+        connected: 30,
+        disconnected: 30
     bluetooth-ble:
         repeat: 60
     serial:
@@ -36,7 +36,7 @@ timer:
 ##    - mqtt
 ##    - print
 ##    - json
-logger: mqtt
+logger: json
 
 ## If logging is set to mqtt, this section must be filled
 ## Set hass to True if you want support for Homeassistant Discovery
@@ -151,3 +151,9 @@ mqtt:
 #      - Power
 #      - Used Energy
 collections:
+  mppt:
+    mppt:
+      - Network Battery Current 
+      - SmartSolar Solar Voltage
+      - Current
+      - Voltage
