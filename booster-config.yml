@@ -1,0 +1,156 @@
+## Add your devices here:
+#devices:
+#    - name: Shunt1
+#      type: smartshunt
+#      protocol: bluetooth-ble
+#      mac: fd:d4:50:0f:6c:1b
+#    - name: Solar1
+#      type: smartsolar
+#      protocol: bluetooth
+#      mac: F9:8E:1C:EC:9C:72
+#    - name: Phoenix1
+#      type: pheonix
+#      protocol: serial
+#      port: /dev/ttyUSB0
+
+devices:
+    - name: booster
+      type: orionsmart
+      protocol: bluetooth
+      mac: F4:47:D5:25:CF:DE
+
+# timer (in seconds) IN DEVELOPMENT!
+timer:
+    retry: 5
+    bluetooth:
+        connected: 30,
+        disconnected: 30
+    bluetooth-ble:
+        repeat: 60
+    serial:
+        repeat: 30
+
+## Logging:
+## possible values:
+##    - syslog
+##    - mqtt
+##    - print
+##    - json
+logger: json
+
+## If logging is set to mqtt, this section must be filled
+## Set hass to True if you want support for Homeassistant Discovery
+## Mandatory:
+##   host: IP or Hostname
+##   port: 1883
+##   base_topic: victron
+##   hass: True/False
+## Optional:
+##   username: MQTT_USER
+##   password: PASSWORD
+mqtt:
+    host: 192.168.3.2
+    port: 1883
+    base_topic: victron
+    hass: True
+    username: USERNAME
+    password: PASSWORD
+
+# Collected enitites by device type:
+# If you change this, the names must be the same like in the value tables from victron.py
+# If you use collections it will send whole collection as json instead of individual values.
+#
+# Replace key to name of your device: For example:
+# collections:
+#   Shunt1:
+#     battery:
+#       - State Of Charge
+#       - ...
+#
+# WARNING: Please do not use collections for protocol bluetooth currently. It will probably not return any values!
+#
+#
+# POSSIBLE COLLECTION SERIAL:
+#  smartshunt:
+#    device:
+#      - Product ID
+#      - Firmware Version
+#    battery:
+#      - State Of Charge
+#      - Time To Go
+#    latest:
+#      - Voltage
+#      - Current
+#      - Power
+#      - Starter Battery Voltage
+#      - Used Energy
+#    history:
+#      - Deepest Discharge
+#      - Last Discharge
+#      - Average Discharge
+#      - Cumulative Ah Drawn
+#      - Time Since Last Full
+#      - Charge Cycles
+#      - Full Discharges
+#      - Battery Voltage min
+#      - Battery Voltage max
+#      - Synchonisations
+#      - Alarm Voltage low
+#      - Alarm Voltage high
+#      - Starter Battery Voltage min
+#      - Starter Battery Voltage max
+#      - Total Discharged Energy
+#      - Total Charged Energy
+#  phoenix:
+#    device:
+#      - Product ID
+#      - Serial
+#      - Firmware
+#      - Production Date
+#    latest:
+#      - Voltage
+#      - AC Voltage
+#      - AC Current
+#      - Mode
+#      - Status
+#      - Warning
+#      - Alarm Reason
+#  smartsolar:
+#    device:
+#      - Day sequence Number (0..364)
+#      - Product ID
+#      - Serial
+#      - Firmware
+#      - Production Date
+#    latest:
+#      - Voltage
+#      - Current
+#      - Voltage Panel
+#      - Power
+#      - Status
+#      - MPPT Tracker Operation Mode
+#      - Off Reason
+#      - Virtual Load Output
+#      - Error Code
+#    history:
+#      - Energy All Time
+#      - Energy Today
+#      - Energy Today Max
+#      - Energy Yesterday
+#      - Energy Yesterday Max
+#
+# POSSIBLE COLLECTION BLUETOOTH-BLE:
+#  smartshunt:
+#    battery:
+#      - State Of Charge
+#      - Remaining Time
+#    latest:
+#      - Voltage
+#      - Starter Voltage
+#      - Current
+#      - Power
+#      - Used Energy
+collections:
+  booster:
+    booster:
+      - Input Voltage
