@@ -8,6 +8,7 @@ from gatt.gatt_linux import Characteristic
 import logging
 import threading
 import time
+import func_timeout
 
 logger = logging.getLogger()
 
@@ -101,8 +102,10 @@ class AnyDevice(gatt.Device):
         time.sleep(0)
 
     def characteristic_write_value_failed(self, characteristic, error):
+        print ("write failed on charactersitic {characteristic.uuid}:merror: {error}")
         logger.warning(f"write failed on charactersitic {characteristic.uuid}:merror: {error}")
         time.sleep(0)
+        exit (22)
 
     def characteristic_value_updated(self, characteristic, value):
         try:
